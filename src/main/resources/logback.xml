@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<property name="logPattern" value="%d{yyyy-MM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %M%n"/>
+	<property name="logEncoding" value="UTF-8"/>
+	<property name="logDirectory" value="logs"/>
+	
+	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	    <file>${logDirectory}/sandbox/sandbox_scoin_v2.log</file>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	        <fileNamePattern>${logDirectory}/sandbox/sanbox_scoin_v2_%d{dd-MM-yyyy}.%i.log</fileNamePattern>
+	        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+	            <maxFileSize>30MB</maxFileSize>
+	        </timeBasedFileNamingAndTriggeringPolicy>
+	    </rollingPolicy>
+	    <encoder>
+	        <charset>${logEncoding}</charset>
+	        <pattern>${logPattern}</pattern>
+	    </encoder>
+	</appender>
+	 <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n</pattern>
+        </encoder>
+    </appender>
+	
+	<root level="info">
+	    <appender-ref ref="fileAppender"/>
+	    <appender-ref ref="Console"/>
+	</root>
+</Configuration>
